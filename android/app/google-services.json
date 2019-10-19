@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "513031538017",
+    "firebase_url": "https://timder-b1514.firebaseio.com",
+    "project_id": "timder-b1514",
+    "storage_bucket": "timder-b1514.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:513031538017:android:2d5cefac2d321df1b23120",
+        "android_client_info": {
+          "package_name": "com.example.timder"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "513031538017-q7kis9asoqluq3bogc981i7o2d8lhk7n.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.timder",
+            "certificate_hash": "32740f15c6c487101a0b2d15dcefc20ad2f173d8"
+          }
+        },
+        {
+          "client_id": "513031538017-eip53ds3il0p92sfjcgrbg2cad8kd6lo.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA3pV8QyIM1lvjXyxfXb8aHhMqGDIOc9sU"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "513031538017-eip53ds3il0p92sfjcgrbg2cad8kd6lo.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
