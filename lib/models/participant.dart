@@ -1,3 +1,5 @@
+import 'package:flutter/widgets.dart';
+
 class Participant {
   String name;
   String gender;
@@ -10,16 +12,17 @@ class Participant {
   bool backend;
   bool mobile;
   bool blockchain;
-  Participant(
-      {this.name,
-      this.gender,
-      this.dob,
-      this.tshirt,
-      this.isAdmin,
-      this.skills,
-      this.design,
-      this.frontend,
-      this.backend,
-      this.mobile,
-      this.blockchain});
+  Participant({
+    @required this.name,
+    @required this.gender,
+    @required this.dob,
+    @required this.tshirt,
+    @required this.isAdmin,
+    @required this.skills,
+    @required this.design,
+    @required this.frontend,
+    @required this.backend,
+    @required this.mobile,
+    @required this.blockchain,
+  });
 }
