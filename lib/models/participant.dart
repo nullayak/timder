@@ -1,9 +1,29 @@
-import 'package:intl/intl.dart';
+import 'package:flutter/material.dart';
 
-class Participant {
-  String _name;
-  String _gender;
-  String _dob;
-  String _tshirt;
-  bool _isAdmin;
+abstract class Participant {
+  String name;
+  String gender;
+  String dob;
+  String tshirtSize;
+  bool isAdmin;
+  bool design;
+  bool frontend;
+  bool backend;
+  bool mobile;
+  bool blockchain;
+  List<String> skills = new List<String>();
+
+  Participant({
+    @required this.name,
+    @required this.gender,
+    @required this.dob,
+    @required this.tshirtSize,
+    @required this.isAdmin,
+    @required this.skills,
+    @required this.design,
+    @required this.frontend,
+    @required this.backend,
+    @required this.mobile,
+    @required this.blockchain,
+  });
 }
