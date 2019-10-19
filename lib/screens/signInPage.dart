@@ -1,4 +1,10 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:google_sign_in/google_sign_in.dart';
+import 'package:timder/Utils/timder.dart';
+import 'package:timder/Utils/timderScaffold.dart';
+import 'package:timder/screens/homepage.dart';
 
 class SignInPage extends StatefulWidget {
   SignInPage({Key key}) : super(key: key);
@@ -7,18 +13,68 @@ class SignInPage extends StatefulWidget {
 }
 
 class _SignInPageState extends State<SignInPage> {
+  final GoogleSignIn _googleSignIn = GoogleSignIn();
+  final FirebaseAuth _auth = FirebaseAuth.instance;
+
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text("Sign-In"),
-      ),
-      body: Center(
-        child: MaterialButton(
-          child: Text("Sign-In"),
-          onPressed: () {},
-        ),
+    return TimderScaffold(
+      body: StreamBuilder<FirebaseUser>(
+        stream: FirebaseAuth.instance.onAuthStateChanged,
+        builder: (BuildContext context, snapshot) {
+          if (snapshot.connectionState == ConnectionState.waiting ||
+              snapshot.connectionState == ConnectionState.none) {
+            return Center(
+              child: CircularProgressIndicator(),
+            );
+          } else {
+            if (snapshot.hasData) {
+              return HomePage();
+            } else {
+              return Center(
+                child: RaisedButton(
+                  onPressed: () async {
+                    FirebaseUser user = await _handleGoogleSignIn();
+                    setBasicData(user);
+                  },
+                  child: Text("Sign In"),
+                ),
+              );
+            }
+          }
+        },
       ),
     );
+  }
+
+  Future<FirebaseUser> _handleGoogleSignIn() async {
+    final GoogleSignInAccount googleUser = await _googleSignIn.signIn();
+    final GoogleSignInAuthentication googleAuth =
+        await googleUser.authentication;
+    AuthCredential credential = GoogleAuthProvider.getCredential(
+      accessToken: googleAuth.accessToken,
+      idToken: googleAuth.idToken,
+    );
+    AuthResult authResult = await _auth.signInWithCredential(credential);
+    FirebaseUser user = authResult.user;
+    return user;
+  }
+
+  void setBasicData(FirebaseUser user) async {
+    Timder.prefs.setString(Timder.displayNamePref, user.displayName);
+    Timder.prefs.setString(Timder.emailPref, user.email);
+    Timder.prefs.setString(Timder.uidPref, user.uid);
+    Timder.prefs.setString(Timder.photoPref, user.photoUrl);
+
+    await Firestore.instance.collection('users').document(user.email).setData(
+      {
+        "display_name": user.displayName,
+        "email": user.email,
+        "uid": user.uid,
+        "photo_url": user.photoUrl,
+      },
+    ).then((onValue) {
+      print("Saved Login Data");
+    });
   }
 }
