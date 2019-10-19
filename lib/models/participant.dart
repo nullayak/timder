@@ -1,22 +1,23 @@
-import 'package:flutter/widgets.dart';
+import 'package:flutter/material.dart';
 
-class Participant {
+abstract class Participant {
   String name;
   String gender;
   String dob;
-  String tshirt;
+  String tshirtSize;
   bool isAdmin;
-  List skills = new List();
   bool design;
   bool frontend;
   bool backend;
   bool mobile;
   bool blockchain;
+  List<String> skills = new List<String>();
+
   Participant({
     @required this.name,
     @required this.gender,
     @required this.dob,
-    @required this.tshirt,
+    @required this.tshirtSize,
     @required this.isAdmin,
     @required this.skills,
     @required this.design,
