@@ -39,74 +39,75 @@ class _TeamPageState extends State<TeamPage> {
               child: Text("Join a Team"),
               onPressed: () {
                 return showDialog(
-                    context: context,
-                    barrierDismissible: true,
-                    builder: (BuildContext context) {
-                      return AlertDialog(
-                        title: Text("Enter joining code"),
-                        content: TextFormField(
-                          controller: joiningCodeController,
+                  context: context,
+                  barrierDismissible: true,
+                  builder: (BuildContext context) {
+                    return AlertDialog(
+                      title: Text("Enter joining code"),
+                      content: TextFormField(
+                        controller: joiningCodeController,
+                      ),
+                      actions: <Widget>[
+                        FlatButton(
+                          child: Text("Cancel"),
+                          onPressed: () {
+                            Navigator.of(context).pop();
+                          },
                         ),
-                        actions: <Widget>[
-                          FlatButton(
-                            child: Text("Cancel"),
-                            onPressed: () {
-                              Navigator.of(context).pop();
-                            },
-                          ),
-                          FlatButton(
-                            child: Text("Join"),
-                            onPressed: () async {
-                              bool isJoinable =
-                                  await joinable(joiningCodeController.text);
-                              if (isJoinable) {
+                        FlatButton(
+                          child: Text("Join"),
+                          onPressed: () async {
+                            bool isJoinable =
+                                await joinable(joiningCodeController.text);
+                            if (isJoinable) {
+                              await Firestore.instance
+                                  .collection("participants")
+                                  .document(
+                                      Timder.prefs.getString(Timder.emailPref))
+                                  .updateData({
+                                "isIndividual": false,
+                              }).then((onValue) async {
                                 await Firestore.instance
-                                    .collection("participants")
-                                    .document(Timder.prefs
-                                        .getString(Timder.emailPref))
+                                    .collection("hackathons")
+                                    .document(widget.hackathon.name)
+                                    .collection("teams")
+                                    .document(joiningCodeController.text)
                                     .updateData({
-                                  "isIndividual": false,
-                                }).then((onValue) async {
-                                  await Firestore.instance
-                                      .collection("hackathons")
-                                      .document(widget.hackathon.name)
-                                      .collection("teams")
-                                      .document(joiningCodeController.text)
-                                      .updateData({
-                                    "teamMembers": FieldValue.arrayUnion([
-                                      Timder.prefs.getString(Timder.emailPref)
-                                    ]),
-                                  });
+                                  "teamMembers": FieldValue.arrayUnion([
+                                    Timder.prefs.getString(Timder.emailPref)
+                                  ]),
                                 });
-                                print("Joined");
-                                Fluttertoast.showToast(
-                                  msg: "Joined team successfully",
-                                  toastLength: Toast.LENGTH_SHORT,
-                                  gravity: ToastGravity.CENTER,
-                                  timeInSecForIos: 1,
-                                  backgroundColor: Colors.red,
-                                  textColor: Colors.white,
-                                  fontSize: 16.0,
-                                );
-                                joiningCodeController.clear();
-                                Navigator.of(context).pop();
-                              } else {
-                                joiningCodeController.clear();
-                                Fluttertoast.showToast(
-                                  msg: "You cannot join this team",
-                                  toastLength: Toast.LENGTH_SHORT,
-                                  gravity: ToastGravity.CENTER,
-                                  timeInSecForIos: 1,
-                                  backgroundColor: Colors.red,
-                                  textColor: Colors.white,
-                                  fontSize: 16.0,
-                                );
-                              }
-                            },
-                          ),
-                        ],
-                      );
-                    });
+                              });
+                              print("Joined");
+                              Fluttertoast.showToast(
+                                msg: "Joined team successfully",
+                                toastLength: Toast.LENGTH_SHORT,
+                                gravity: ToastGravity.CENTER,
+                                timeInSecForIos: 1,
+                                backgroundColor: Colors.red,
+                                textColor: Colors.white,
+                                fontSize: 16.0,
+                              );
+                              joiningCodeController.clear();
+                              Navigator.of(context).pop();
+                            } else {
+                              joiningCodeController.clear();
+                              Fluttertoast.showToast(
+                                msg: "You cannot join this team",
+                                toastLength: Toast.LENGTH_SHORT,
+                                gravity: ToastGravity.CENTER,
+                                timeInSecForIos: 1,
+                                backgroundColor: Colors.red,
+                                textColor: Colors.white,
+                                fontSize: 16.0,
+                              );
+                            }
+                          },
+                        ),
+                      ],
+                    );
+                  },
+                );
               },
             ),
             FlatButton(

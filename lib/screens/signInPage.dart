@@ -63,8 +63,6 @@ class _SignInPageState extends State<SignInPage> {
   }
 
   void setBasicData(FirebaseUser user) async {
-    // Timder.currentUser.backend = true;
-
     Timder.prefs.setString(Timder.displayNamePref, user.displayName);
     Timder.prefs.setString(Timder.emailPref, user.email);
     Timder.prefs.setString(Timder.uidPref, user.uid);
@@ -78,8 +76,30 @@ class _SignInPageState extends State<SignInPage> {
         "display_name": user.displayName,
         "email": user.email,
         "uid": user.uid,
-        "photo_url": user.photoUrl,
+        "photoUrl": user.photoUrl,
         "isIndividual": true,
+        "name": user.displayName,
+        "gender": "M",
+        "dob": "5 Aug 2000",
+        "tshirtSize": "M",
+        "bio": "My Bio",
+        "isAdmin": false,
+        "design": false,
+        "frontend": true,
+        "backend": true,
+        "mobile": true,
+        "blockchain": false,
+        "institute": "Indian Institute of Information Technology",
+        "graduationYear": 2022,
+        "stream": "CS",
+        "company": "NA",
+        "experience": "NA",
+        "role": "NA",
+        "rating": 120,
+        "rightSwiped": [],
+        "rightSwipes": [],
+        "skills": [],
+        "photos": [],
       },
       merge: true,
     ).then((onValue) {
