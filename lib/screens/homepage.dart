@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:timder/Utils/timderScaffold.dart';
-import 'package:timder/screens/firstScreen.dart';
+import 'package:timder/screens/profilePage.dart';
 import 'package:timder/screens/hackathons.dart';
 
 class HomePage extends StatefulWidget {
@@ -12,7 +12,7 @@ class _HomePageState extends State<HomePage> {
   int currrentIndex = 0;
 
   List<Widget> _displayWidgets = <Widget>[
-    FirstScreen(),
+    ProfilePage(),
     Hackathon(),
   ];
 
