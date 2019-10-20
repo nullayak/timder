@@ -64,7 +64,8 @@ class _TimderSwipeState extends State<TimderSwipe> {
               minWidth: MediaQuery.of(context).size.width * 0.8,
               minHeight: MediaQuery.of(context).size.width * 0.8,
               cardBuilder: (context, index) => Card(
-                child: Image.network(cards[index]),
+                child: Image.network(
+                    snapshot.data.documents[index].data["photoUrl"]),
               ),
               cardController: controller,
               swipeUpdateCallback:
@@ -81,7 +82,7 @@ class _TimderSwipeState extends State<TimderSwipe> {
               swipeCompleteCallback:
                   (CardSwipeOrientation orientation, int index) {
                 /// Get orientation & index of swiped card!
-                print("Just Swiped Right ${isRight}");
+                print("Just Swiped Right $isRight");
               },
             );
           }
