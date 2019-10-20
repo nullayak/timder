@@ -59,7 +59,7 @@ class _HackathonScreenState extends State<HackathonScreen> {
       margin: const EdgeInsets.all(10),
       elevation: 12,
       shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(20),
+        borderRadius: BorderRadius.circular(10),
       ),
       child: InkWell(
         child: Container(
@@ -83,7 +83,7 @@ class _HackathonScreenState extends State<HackathonScreen> {
               ),
             ],
           ),
-          height: MediaQuery.of(context).size.height * 0.2,
+          height: 200,
           width: MediaQuery.of(context).size.width * 0.4,
         ),
         onTap: () {
