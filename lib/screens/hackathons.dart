@@ -8,10 +8,14 @@ class Hackathon extends StatefulWidget {
 class _HackathonState extends State<Hackathon> {
   Widget cardbuilder() {
     return Card(
-      shape: RoundedRectangleBorder(),
+      margin: EdgeInsets.all(10),
+      elevation: 12,
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(20),
+      ),
       child: InkWell(
         child: Container(
-          padding: const EdgeInsets.fromLTRB(8.0, 8.0, 0, 8.0),
+          padding: const EdgeInsets.all(3),
           child: Column(
             mainAxisAlignment: MainAxisAlignment.start,
             children: <Widget>[
@@ -22,8 +26,8 @@ class _HackathonState extends State<Hackathon> {
               ),
             ],
           ),
-          height: MediaQuery.of(context).size.height * 0.5,
-          width: MediaQuery.of(context).size.width * 0.98,
+          height: MediaQuery.of(context).size.height * 0.2,
+          width: MediaQuery.of(context).size.width * 0.4,
         ),
         onTap: () {},
         splashColor: Colors.redAccent,
@@ -33,14 +37,20 @@ class _HackathonState extends State<Hackathon> {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      child: SingleChildScrollView(
-          child: Row(
-        mainAxisAlignment: MainAxisAlignment.start,
-        children: <Widget>[
-          cardbuilder(),
-        ],
-      )),
+    return SingleChildScrollView(
+      child: Center(
+        child: Wrap(
+          alignment: WrapAlignment.spaceBetween,
+          runAlignment: WrapAlignment.spaceEvenly,
+          // mainAxisAlignment: MainAxisAlignment.start,
+          children: <Widget>[
+            cardbuilder(),
+            cardbuilder(),
+            cardbuilder(),
+            cardbuilder(),
+          ],
+        ),
+      ),
     );
   }
 }
