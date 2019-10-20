@@ -55,7 +55,7 @@ class _TimderSwipeState extends State<TimderSwipe> {
             //     },
             //   );
             return TinderSwapCard(
-              orientation: AmassOrientation.BOTTOM,
+              orientation: AmassOrientation.TOP,
               totalNum: 2,
               stackNum: 2,
               swipeEdge: 4.0,
