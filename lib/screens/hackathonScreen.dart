@@ -1,6 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:timder/models/hackathon.dart';
+import 'package:timder/screens/teampage.dart';
 
 class HackathonScreen extends StatefulWidget {
   @override
@@ -27,11 +28,11 @@ class _HackathonScreenState extends State<HackathonScreen> {
             );
           } else {
             hackathons = List<Hackathon>(snapshot.data.documents.length);
-            print(snapshot.data.documents);
+            // print(snapshot.data.documents);
             for (int i = 0; i < snapshot.data.documents.length; i++) {
               hackathons[i] = Hackathon.fromJSON(snapshot.data.documents[i]);
             }
-            print(hackathons[0].toJSON());
+            // print(hackathons[0].toJSON());
 
             return SingleChildScrollView(
               child: Center(
@@ -67,7 +68,7 @@ class _HackathonScreenState extends State<HackathonScreen> {
             crossAxisAlignment: CrossAxisAlignment.start,
             mainAxisAlignment: MainAxisAlignment.start,
             children: <Widget>[
-              Image.asset("assets/inout.png"),
+              Image.network(hackathon.imageUrl),
               Text(
                 "${hackathon.name}",
                 style: TextStyle(fontSize: 18.0),
@@ -85,7 +86,17 @@ class _HackathonScreenState extends State<HackathonScreen> {
           height: MediaQuery.of(context).size.height * 0.2,
           width: MediaQuery.of(context).size.width * 0.4,
         ),
-        onTap: () {},
+        onTap: () {
+          Navigator.of(context).push(
+            MaterialPageRoute(
+              builder: (BuildContext context) {
+                return TeamPage(
+                  hackathon: hackathon,
+                );
+              },
+            ),
+          );
+        },
         splashColor: Colors.redAccent,
       ),
     );

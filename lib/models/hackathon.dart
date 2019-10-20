@@ -7,6 +7,7 @@ class Hackathon {
   String duration;
   String startTime;
   String desc;
+  String imageUrl;
   int maxTeamSize;
   int minTeamSize;
   int applications;
@@ -20,6 +21,7 @@ class Hackathon {
     @required this.name,
     @required this.startTime,
     @required this.desc,
+    @required this.imageUrl,
   });
 
   Hackathon.fromJSON(DocumentSnapshot snapshot) {
@@ -31,6 +33,7 @@ class Hackathon {
     this.minTeamSize = snapshot["minTeamSize"];
     this.applications = snapshot["applications"];
     this.desc = snapshot["desc"];
+    this.imageUrl = snapshot["imageUrl"];
   }
 
   toJSON() {
@@ -43,6 +46,7 @@ class Hackathon {
       "minTeamSize": this.minTeamSize,
       "applications": this.applications,
       "desc": this.desc,
+      "imageUrl": this.imageUrl,
     };
   }
 }
