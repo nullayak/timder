@@ -41,8 +41,8 @@ class _HackathonScreenState extends State<HackathonScreen> {
                   runAlignment: WrapAlignment.spaceEvenly,
                   children: <Widget>[
                     cardBuilder(hackathon: hackathons[0]),
-                    cardBuilder(hackathon: hackathons[0]),
-                    cardBuilder(hackathon: hackathons[0]),
+                    cardBuilder(hackathon: hackathons[1]),
+                    cardBuilder(hackathon: hackathons[1]),
                     cardBuilder(hackathon: hackathons[0]),
                   ],
                 ),

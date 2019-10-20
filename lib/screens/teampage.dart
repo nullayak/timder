@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:timder/Utils/timderScaffold.dart';
 import 'package:timder/models/hackathon.dart';
+import 'package:timder/screens/timderSwipe.dart';
 
 class TeamPage extends StatefulWidget {
   final Hackathon hackathon;
@@ -16,23 +17,45 @@ class _TeamPageState extends State<TeamPage> {
     return TimderScaffold(
       showNotificationIcon: true,
       title: "Team Details",
-      body: Column(
-        crossAxisAlignment: CrossAxisAlignment.center,
-        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-        children: <Widget>[
-          RaisedButton(
-            child: Text("Create Team"),
-            onPressed: () {},
-          ),
-          RaisedButton(
-            child: Text("Join Team"),
-            onPressed: () {},
-          ),
-          RaisedButton(
-            child: Text("Apply Individually"),
-            onPressed: () {},
-          ),
-        ],
+      body: Center(
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.center,
+          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+          children: <Widget>[
+            FlatButton(
+              color: Colors.blue,
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(20),
+              ),
+              child: Text("Join a Team"),
+              onPressed: () {},
+            ),
+            FlatButton(
+              color: Colors.red,
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(20),
+              ),
+              child: Text("Look for Teammates"),
+              onPressed: () {
+                Navigator.of(context).push(
+                  MaterialPageRoute(
+                    builder: (BuildContext context) {
+                      return TimderSwipe();
+                    },
+                  ),
+                );
+              },
+            ),
+            FlatButton(
+              color: Colors.green,
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(20),
+              ),
+              child: Text("Create your own Team"),
+              onPressed: () {},
+            ),
+          ],
+        ),
       ),
     );
   }

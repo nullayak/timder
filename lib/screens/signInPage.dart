@@ -75,6 +75,7 @@ class _SignInPageState extends State<SignInPage> {
         "uid": user.uid,
         "photo_url": user.photoUrl,
       },
+      merge: true,
     ).then((onValue) {
       print(
           "Saved Login Data: ${Timder.prefs.getString(Timder.displayNamePref)}");
