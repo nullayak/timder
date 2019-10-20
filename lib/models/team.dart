@@ -1,11 +1,10 @@
-import 'package:timder/models/participant.dart';
 import 'package:flutter/material.dart';
 
-class Team {
-  List<Participant> teamMembers = new List<Participant>();
+class Team<T> {
+  List<T> teamMembers = new List<T>();
   String teamName;
   int maxTeamSize;
-  List<Participant> participants = new List<Participant>();
+  List<T> participants = new List<T>();
   Team({
     @required this.teamMembers,
     @required this.teamName,

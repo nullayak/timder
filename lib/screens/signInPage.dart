@@ -18,20 +18,21 @@ class _SignInPageState extends State<SignInPage> {
 
   @override
   Widget build(BuildContext context) {
-    return TimderScaffold(
-      body: StreamBuilder<FirebaseUser>(
-        stream: FirebaseAuth.instance.onAuthStateChanged,
-        builder: (BuildContext context, snapshot) {
-          if (snapshot.connectionState == ConnectionState.waiting ||
-              snapshot.connectionState == ConnectionState.none) {
-            return Center(
-              child: CircularProgressIndicator(),
-            );
+    return StreamBuilder<FirebaseUser>(
+      stream: FirebaseAuth.instance.onAuthStateChanged,
+      builder: (BuildContext context, snapshot) {
+        if (snapshot.connectionState == ConnectionState.waiting ||
+            snapshot.connectionState == ConnectionState.none) {
+          return Center(
+            child: CircularProgressIndicator(),
+          );
+        } else {
+          if (snapshot.hasData) {
+            return HomePage();
           } else {
-            if (snapshot.hasData) {
-              return HomePage();
-            } else {
-              return Center(
+            return TimderScaffold(
+              title: "Sign In",
+              body: Center(
                 child: RaisedButton(
                   onPressed: () async {
                     FirebaseUser user = await _handleGoogleSignIn();
@@ -39,11 +40,11 @@ class _SignInPageState extends State<SignInPage> {
                   },
                   child: Text("Sign In"),
                 ),
-              );
-            }
+              ),
+            );
           }
-        },
-      ),
+        }
+      },
     );
   }
 
@@ -74,7 +75,8 @@ class _SignInPageState extends State<SignInPage> {
         "photo_url": user.photoUrl,
       },
     ).then((onValue) {
-      print("Saved Login Data");
+      print(
+          "Saved Login Data: ${Timder.prefs.getString(Timder.displayNamePref)}");
     });
   }
 }
