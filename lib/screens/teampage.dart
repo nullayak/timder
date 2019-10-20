@@ -1,18 +1,21 @@
 import 'package:flutter/material.dart';
+import 'package:timder/Utils/timderScaffold.dart';
+import 'package:timder/models/hackathon.dart';
 
-class TeaamPage extends StatefulWidget {
-  TeaamPage({Key key}) : super(key: key);
+class TeamPage extends StatefulWidget {
+  final Hackathon hackathon;
 
-  _TeaamPageState createState() => _TeaamPageState();
+  TeamPage({@required this.hackathon});
+
+  _TeamPageState createState() => _TeamPageState();
 }
 
-class _TeaamPageState extends State<TeaamPage> {
+class _TeamPageState extends State<TeamPage> {
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text("Team Details"),
-      ),
+    return TimderScaffold(
+      showNotificationIcon: true,
+      title: "Team Details",
       body: Column(
         crossAxisAlignment: CrossAxisAlignment.center,
         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
