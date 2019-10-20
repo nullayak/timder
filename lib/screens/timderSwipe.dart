@@ -1,7 +1,9 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_tindercard/flutter_tindercard.dart';
+import 'package:timder/models/participant.dart';
+import 'package:tinder_card/cards.dart';
 import 'package:timder/Utils/timderScaffold.dart';
+import 'package:flutter_tindercard/flutter_tindercard.dart';
 
 class TimderSwipe extends StatefulWidget {
   @override
@@ -9,9 +11,10 @@ class TimderSwipe extends StatefulWidget {
 }
 
 class _TimderSwipeState extends State<TimderSwipe> {
+  bool isRight = false;
   List<String> cards = [
     "https://hackinout.co/img/hero.png",
-    "https://hackinout.co/img/hero.png"
+    "https://hackinout.co/img/hero.png",
   ];
   CardController controller = CardController();
   @override
@@ -20,7 +23,10 @@ class _TimderSwipeState extends State<TimderSwipe> {
       title: "Swipe",
       showNotificationIcon: true,
       body: FutureBuilder<QuerySnapshot>(
-        future: Firestore.instance.collection("users").getDocuments(),
+        future: Firestore.instance
+            .collection("participants")
+            .where("isIndividual", isEqualTo: true)
+            .getDocuments(),
         builder: (BuildContext context, AsyncSnapshot<QuerySnapshot> snapshot) {
           if (snapshot.connectionState == ConnectionState.waiting ||
               snapshot.connectionState == ConnectionState.none) {
@@ -32,35 +38,52 @@ class _TimderSwipeState extends State<TimderSwipe> {
               return Center(
                 child: Text("Error: ${snapshot.error}"),
               );
-            } else {
-              return TinderSwapCard(
-                orientation: AmassOrientation.BOTTOM,
-                totalNum: 2,
-                stackNum: 2,
-                swipeEdge: 4.0,
-                maxWidth: MediaQuery.of(context).size.width * 0.9,
-                maxHeight: MediaQuery.of(context).size.width * 0.9,
-                minWidth: MediaQuery.of(context).size.width * 0.8,
-                minHeight: MediaQuery.of(context).size.width * 0.8,
-                cardBuilder: (context, index) => Card(
-                  child: Image.network(cards[index]),
-                ),
-                cardController: controller,
-                swipeUpdateCallback:
-                    (DragUpdateDetails details, Alignment align) {
-                  /// Get swiping card's alignment
-                  if (align.x < 0) {
-                    //Card is LEFT swiping
-                  } else if (align.x > 0) {
-                    //Card is RIGHT swiping
-                  }
-                },
-                swipeCompleteCallback:
-                    (CardSwipeOrientation orientation, int index) {
-                  /// Get orientation & index of swiped card!
-                },
-              );
             }
+
+            /// else {
+            //   List<Participant> individualParticipants =
+            //       List<Participant>(snapshot.data.documents.length);
+            //   for (int i = 0; i < snapshot.data.documents.length; i++) {
+            //     individualParticipants[i] =
+            //         Participant.fromJSON(snapshot.data.documents[i].data);
+            //   }
+            //   print(snapshot.data.documents[0].data);
+            //   return TinderSwapCard(
+            //     demoProfiles: individualParticipants,
+            //     myCallback: (decision) {
+            //       print("Desision ${decision.index}");
+            //     },
+            //   );
+            return TinderSwapCard(
+              orientation: AmassOrientation.BOTTOM,
+              totalNum: 2,
+              stackNum: 2,
+              swipeEdge: 4.0,
+              maxWidth: MediaQuery.of(context).size.width * 0.9,
+              maxHeight: MediaQuery.of(context).size.width * 0.9,
+              minWidth: MediaQuery.of(context).size.width * 0.8,
+              minHeight: MediaQuery.of(context).size.width * 0.8,
+              cardBuilder: (context, index) => Card(
+                child: Image.network(cards[index]),
+              ),
+              cardController: controller,
+              swipeUpdateCallback:
+                  (DragUpdateDetails details, Alignment align) {
+                /// Get swiping card's alignment
+                if (align.x < 0) {
+                  isRight = false;
+                  //Card is LEFT swiping
+                } else if (align.x > 0) {
+                  isRight = true;
+                  //Card is RIGHT swiping
+                }
+              },
+              swipeCompleteCallback:
+                  (CardSwipeOrientation orientation, int index) {
+                /// Get orientation & index of swiped card!
+                print("Just Swiped Right ${isRight}");
+              },
+            );
           }
         },
       ),

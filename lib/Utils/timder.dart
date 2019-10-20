@@ -1,5 +1,5 @@
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:firebase_auth/firebase_auth.dart';
+import 'package:timder/models/participant.dart';
 
 class Timder {
   static SharedPreferences prefs;
@@ -9,5 +9,5 @@ class Timder {
   static const String uidPref = "uidPref";
   static const String photoPref = "photoPref";
 
-  static FirebaseUser user;
+  static Participant currentUser;
 }
