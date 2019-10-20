@@ -24,8 +24,8 @@ class Participant {
   double experience;
   String role;
   double rating;
-  List<String> rightSwiped = new List<String>();
   List<String> rightSwipes = new List<String>();
+  List<String> leftSwipes = new List<String>();
   List<String> skills = new List<String>();
   List<String> photos = new List<String>();
 
@@ -81,8 +81,8 @@ class Participant {
     this.experience = snapshot["experience"];
     this.role = snapshot["role"];
     this.rating = snapshot["rating"];
-    this.rightSwiped = snapshot["rightSwiped"];
-    this.rightSwipes = snapshot["rightSwipes"];
+    this.rightSwipes = snapshot["rightSwiped"];
+    this.leftSwipes = snapshot["leftSwipes"];
     this.skills = snapshot["skills"];
     this.photos = snapshot["photos"];
   }
@@ -111,7 +111,7 @@ class Participant {
       "experience": this.experience,
       "role": this.role,
       "rating": this.rating,
-      "rightSwiped": <String>[],
+      "leftSwipes": <String>[],
       "rightSwipes": <String>[],
       "skills": <String>[],
     };
