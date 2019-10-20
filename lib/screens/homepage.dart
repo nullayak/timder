@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:timder/Utils/timderScaffold.dart';
+import 'package:timder/screens/hackathonScreen.dart';
 import 'package:timder/screens/profilePage.dart';
-import 'package:timder/screens/hackathons.dart';
 
 class HomePage extends StatefulWidget {
   @override
@@ -13,7 +13,7 @@ class _HomePageState extends State<HomePage> {
 
   List<Widget> _displayWidgets = <Widget>[
     ProfilePage(),
-    Hackathon(),
+    HackathonScreen(),
   ];
 
   @override
