@@ -6,6 +6,7 @@ abstract class Participant {
   String dob;
   String tshirtSize;
   bool isAdmin;
+  bool isIndividual;
   bool design;
   bool frontend;
   bool backend;
