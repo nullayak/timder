@@ -41,8 +41,8 @@ class _HackathonScreenState extends State<HackathonScreen> {
                   runAlignment: WrapAlignment.spaceEvenly,
                   children: <Widget>[
                     cardBuilder(hackathon: hackathons[0]),
-                    cardBuilder(hackathon: hackathons[0]),
-                    cardBuilder(hackathon: hackathons[0]),
+                    cardBuilder(hackathon: hackathons[1]),
+                    cardBuilder(hackathon: hackathons[1]),
                     cardBuilder(hackathon: hackathons[0]),
                   ],
                 ),
@@ -83,7 +83,7 @@ class _HackathonScreenState extends State<HackathonScreen> {
               ),
             ],
           ),
-          height: MediaQuery.of(context).size.height * 0.2,
+          height: 200,
           width: MediaQuery.of(context).size.width * 0.4,
         ),
         onTap: () {
