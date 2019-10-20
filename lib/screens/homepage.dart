@@ -20,6 +20,7 @@ class _HomePageState extends State<HomePage> {
   Widget build(BuildContext context) {
     return TimderScaffold(
       title: "Home page",
+      showNotificationIcon: true,
       body: _displayWidgets.elementAt(currrentIndex),
       bottomWidget: BottomNavigationBar(
         currentIndex: currrentIndex,

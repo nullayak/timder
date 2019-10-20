@@ -32,6 +32,7 @@ class _SignInPageState extends State<SignInPage> {
           } else {
             return TimderScaffold(
               title: "Sign In",
+              showNotificationIcon: false,
               body: Center(
                 child: RaisedButton(
                   onPressed: () async {
