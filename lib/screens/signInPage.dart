@@ -73,7 +73,7 @@ class _SignInPageState extends State<SignInPage> {
         .document(user.email)
         .setData(
       {
-        "display_name": user.displayName,
+        "displayName": user.displayName,
         "email": user.email,
         "uid": user.uid,
         "photoUrl": user.photoUrl,
