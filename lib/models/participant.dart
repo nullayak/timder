@@ -12,6 +12,9 @@ abstract class Participant {
   bool mobile;
   bool blockchain;
   List<String> skills = new List<String>();
+  double rating;
+  List<String> rightSwiped = new List<String>();
+  List<String> rightSwipes = new List<String>();
 
   Participant({
     @required this.name,
@@ -25,5 +28,6 @@ abstract class Participant {
     @required this.backend,
     @required this.mobile,
     @required this.blockchain,
+    @required this.rating,
   });
 }
