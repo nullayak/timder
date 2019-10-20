@@ -4,10 +4,10 @@ import 'package:firebase_auth/firebase_auth.dart';
 class Timder {
   static SharedPreferences prefs;
 
-  static String displayNamePref = "displayNamePref";
-  static String emailPref = "emailPref";
-  static String uidPref = "uidPref";
-  static String photoPref = "photoPref";
+  static const String displayNamePref = "displayNamePref";
+  static const String emailPref = "emailPref";
+  static const String uidPref = "uidPref";
+  static const String photoPref = "photoPref";
 
   static FirebaseUser user;
 }

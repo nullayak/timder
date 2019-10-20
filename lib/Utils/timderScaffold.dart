@@ -6,22 +6,26 @@ class TimderScaffold extends StatelessWidget {
   final Widget floatingButton;
   final Widget bottomWidget;
   final String title;
-  final Widget leadingAvatar;
+
+  final Widget leadingAvatar = Padding(
+    padding: EdgeInsets.all(10),
+    child: CircleAvatar(
+      backgroundImage: NetworkImage(Timder.prefs.getString(Timder.photoPref)),
+    ),
+  );
 
   TimderScaffold({
     @required this.body,
     @required this.title,
     this.floatingButton,
     this.bottomWidget,
-    this.leadingAvatar = const CircleAvatar(
-      backgroundImage: NetworkImage(const Timder.prefs.getString(const Timder.photoPref)),
-    ),
   });
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        leading: leadingAvatar,
         title: Text(title),
       ),
       body: this.body,
