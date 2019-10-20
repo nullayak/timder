@@ -34,8 +34,8 @@ class _ProfilePageState extends State<ProfilePage> {
               ),
             ],
           ),
-          height: MediaQuery.of(context).size.height * 0.2,
-          width: MediaQuery.of(context).size.width * 0.4,
+          height: MediaQuery.of(context).size.height * 0.19,
+          width: MediaQuery.of(context).size.width * 0.38,
         ),
         onTap: () {},
         splashColor: Colors.redAccent,
@@ -49,7 +49,17 @@ class _ProfilePageState extends State<ProfilePage> {
         child: SingleChildScrollView(
       child: Column(
         mainAxisAlignment: MainAxisAlignment.start,
+        crossAxisAlignment: CrossAxisAlignment.start,
         children: <Widget>[
+          Padding(
+            padding: const EdgeInsets.all(20.0),
+            child: Text(
+              "Pushkar Patel",
+              softWrap: true,
+              style: TextStyle(fontSize: 30, fontWeight: FontWeight.bold),
+              textAlign: TextAlign.start,
+            ),
+          ),
           SingleChildScrollView(
             scrollDirection: Axis.horizontal,
             child: Row(
@@ -61,7 +71,29 @@ class _ProfilePageState extends State<ProfilePage> {
                 cardBuilder("flutter"),
               ],
             ),
-          )
+          ),
+          Padding(
+            padding: const EdgeInsets.all(15.0),
+            child: Text(
+              "Gender, Age :\nM, 19",
+              softWrap: true,
+              style: TextStyle(
+                fontSize: 25,
+              ),
+              textAlign: TextAlign.start,
+            ),
+          ),
+          Padding(
+            padding: const EdgeInsets.all(15.0),
+            child: Text(
+              "T-shirt Size: \nM",
+              softWrap: true,
+              style: TextStyle(
+                fontSize: 25,
+              ),
+              textAlign: TextAlign.start,
+            ),
+          ),
         ],
       ),
     ));
