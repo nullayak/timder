@@ -50,7 +50,13 @@ flutter:
   # To add assets to your application, add an assets section, like this:
   assets:
    - assets/inout.png
-  #  - images/a_dot_ham.jpeg
+   - assets/angular.png
+   - assets/cpp.png
+   - assets/firebase.png
+   - assets/flutter.png
+   - assets/java.png
+   - assets/python.png
+   - assets/tensorflow.png
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware.
