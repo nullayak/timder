@@ -1,5 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:timder/Utils/timder.dart';
 import 'package:timder/models/hackathon.dart';
 import 'package:timder/screens/teampage.dart';
 
@@ -39,12 +40,9 @@ class _HackathonScreenState extends State<HackathonScreen> {
                 child: Wrap(
                   alignment: WrapAlignment.spaceBetween,
                   runAlignment: WrapAlignment.spaceEvenly,
-                  children: <Widget>[
-                    cardBuilder(hackathon: hackathons[0]),
-                    cardBuilder(hackathon: hackathons[1]),
-                    cardBuilder(hackathon: hackathons[1]),
-                    cardBuilder(hackathon: hackathons[0]),
-                  ],
+                  children: cardList(
+                    hackathons: hackathons,
+                  ),
                 ),
               ),
             );
@@ -52,6 +50,14 @@ class _HackathonScreenState extends State<HackathonScreen> {
         }
       },
     );
+  }
+
+  List<Widget> cardList({@required List<Hackathon> hackathons}) {
+    List<Widget> cards = List<Widget>(hackathons.length);
+    for (int i = 0; i < hackathons.length; i++) {
+      cards[i] = cardBuilder(hackathon: hackathons[i]);
+    }
+    return cards;
   }
 
   Widget cardBuilder({@required Hackathon hackathon}) {
@@ -92,6 +98,7 @@ class _HackathonScreenState extends State<HackathonScreen> {
               builder: (BuildContext context) {
                 return TeamPage(
                   hackathon: hackathon,
+                  currentUser: Timder.currentUser,
                 );
               },
             ),

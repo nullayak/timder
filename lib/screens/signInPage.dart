@@ -63,17 +63,23 @@ class _SignInPageState extends State<SignInPage> {
   }
 
   void setBasicData(FirebaseUser user) async {
+    // Timder.currentUser.backend = true;
+
     Timder.prefs.setString(Timder.displayNamePref, user.displayName);
     Timder.prefs.setString(Timder.emailPref, user.email);
     Timder.prefs.setString(Timder.uidPref, user.uid);
     Timder.prefs.setString(Timder.photoPref, user.photoUrl);
 
-    await Firestore.instance.collection('users').document(user.email).setData(
+    await Firestore.instance
+        .collection('participants')
+        .document(user.email)
+        .setData(
       {
         "display_name": user.displayName,
         "email": user.email,
         "uid": user.uid,
         "photo_url": user.photoUrl,
+        "isIndividual": true,
       },
       merge: true,
     ).then((onValue) {
