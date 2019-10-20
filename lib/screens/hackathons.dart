@@ -9,7 +9,7 @@ class _HackathonState extends State<Hackathon> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      child: Text("hackathons"),
+      child: Image.asset("assets/tinder.png")
     );
   }
 }
