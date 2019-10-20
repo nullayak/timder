@@ -69,7 +69,7 @@ class _TimderSwipeState extends State<TimderSwipe> {
               ),
               cardController: controller,
               swipeUpdateCallback:
-                  (DragUpdateDetails details, Alignment align) {
+                  (DragUpdateDetails details, Alignment align) async{
                 /// Get swiping card's alignment
                 if (align.x < 0) {
                   isRight = false;
@@ -77,6 +77,7 @@ class _TimderSwipeState extends State<TimderSwipe> {
                 } else if (align.x > 0) {
                   isRight = true;
                   //Card is RIGHT swiping
+                  // await Firestore.instance.collection("")
                 }
               },
               swipeCompleteCallback:

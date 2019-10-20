@@ -33,7 +33,6 @@ class _HackathonScreenState extends State<HackathonScreen> {
             for (int i = 0; i < snapshot.data.documents.length; i++) {
               hackathons[i] = Hackathon.fromJSON(snapshot.data.documents[i]);
             }
-            // print(hackathons[0].toJSON());
 
             return SingleChildScrollView(
               child: Center(

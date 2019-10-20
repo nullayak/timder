@@ -23,6 +23,7 @@ class _TeamPageState extends State<TeamPage> {
   @override
   Widget build(BuildContext context) {
     TextEditingController joiningCodeController = TextEditingController();
+    TextEditingController createTeamController = TextEditingController();
     return TimderScaffold(
       showNotificationIcon: true,
       title: "Team Details",
@@ -132,7 +133,63 @@ class _TeamPageState extends State<TeamPage> {
                 borderRadius: BorderRadius.circular(20),
               ),
               child: Text("Create your own Team"),
-              onPressed: () {},
+              onPressed: () {
+                return showDialog(
+                  context: context,
+                  barrierDismissible: true,
+                  builder: (BuildContext context) {
+                    return AlertDialog(
+                      title: Text("Enter Team name"),
+                      content: TextFormField(
+                        controller: createTeamController,
+                      ),
+                      actions: <Widget>[
+                        FlatButton(
+                          child: Text("Cancel"),
+                          onPressed: () {
+                            Navigator.of(context).pop();
+                          },
+                        ),
+                        FlatButton(
+                          child: Text("Create"),
+                          onPressed: () async {
+                            bool isCreateable;
+                            isCreateable =
+                                await createable(createTeamController.text);
+                            if (isCreateable) {
+                              print("createable");
+                              print(widget.hackathon.name);
+                              await Firestore.instance
+                                  .collection("hackathons")
+                                  .document(widget.hackathon.name)
+                                  .collection("teams")
+                                  .document(createTeamController.text)
+                                  .setData({
+                                "joiningCode": createTeamController.text,
+                                "teamName": createTeamController.text,
+                                "teamMembers": FieldValue.arrayUnion(
+                                    [Timder.prefs.getString(Timder.emailPref)]),
+                              });
+                            } else {
+                              print("Cannot create");
+                              Fluttertoast.showToast(
+                                msg: "You cannot create this team",
+                                toastLength: Toast.LENGTH_SHORT,
+                                gravity: ToastGravity.CENTER,
+                                timeInSecForIos: 1,
+                                backgroundColor: Colors.red,
+                                textColor: Colors.white,
+                                fontSize: 16.0,
+                              );
+                              createTeamController.clear();
+                            }
+                          },
+                        ),
+                      ],
+                    );
+                  },
+                );
+              },
             ),
           ],
         ),
@@ -152,5 +209,19 @@ class _TeamPageState extends State<TeamPage> {
       return true;
     }
     return false;
+  }
+
+  Future<bool> createable(String teamName) async {
+    var snapshot = await Firestore.instance
+        .collection("hackathons")
+        .document(widget.hackathon.name)
+        .collection("teams")
+        .getDocuments();
+    for (int i = 0; i < snapshot.documents.length; i++) {
+      if (snapshot.documents[i].data["teamName"] == teamName) {
+        return false;
+      }
+    }
+    return true;
   }
 }
